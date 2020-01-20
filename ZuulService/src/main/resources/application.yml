@@ -1,0 +1,48 @@
+server:
+  port: 8020
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /info
+    healthCheckUrlPath: /health
+
+zuul:
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 60000
+  ignored-services: "*"
+  ribbon:
+    ReadTimeout: 20000
+    eager-load:
+      enabled: true
+  routes:
+    user-service:
+      path: /users/**
+      service-id: user-service
+      strip-prefix: false
+    catalog-service:
+      path: /**
+      service-id: content-service
+      strip-prefix: true
+    oauth:
+      path: /auth/**
+      service-id: oauth
+      strip-prefix: false
+
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://oauth:8090/auth/oauth/token
+      clientId: messaging-client
+      clientSecret: "{noop}secret"
+
+#security:
+#  oauth2:
+#    resource:
+#      token-info-uri: https://oauth:8090/auth/oauth/check_token
+#      userInfoUri: http://oauth:8090/auth/user
+#    client:
+#      accessTokenUri: http://oauth:8090/uaa/oauth/token
+#      clientId: messaging-client
+#      clientSecret:

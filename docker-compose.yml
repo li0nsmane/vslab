@@ -1,0 +1,126 @@
+version: '3.7'
+
+services:
+  database:
+    image: "postgres"
+    container_name: "database-container"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password1234
+      - POSTGRES_DB=db
+    ports:
+      - "54320:5432"
+    networks:
+      local_net:
+        aliases:
+          - databaseservice
+
+  eureka:
+    build:
+      context: ./eurekaserver
+      dockerfile: ./Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      local_net:
+        aliases:
+          - eurekaservice
+
+  zuul:
+    depends_on:
+      - eureka
+    build:
+      context: ./zuulservice
+      dockerfile: ./Dockerfile
+    ports:
+      - "8020:8020"
+    networks:
+      local_net:
+        aliases:
+          - zuul
+
+#  hystrix:
+ #   depends_on:
+  #    - eureka
+ #   build:
+  #    context: ./hystrixdashboard
+   #   dockerfile: ./Dockerfile
+  #  ports:
+   #   - "8010:8010"
+  #  networks:
+   #   local_net:
+    #    aliases:
+     #     - hystrix
+
+#  categoryservice:
+#    depends_on:
+#      - eureka
+#      - database
+#    build:
+#      context: ./categoryservice
+#      dockerfile: ./Dockerfile
+#    ports:
+#      - "8002:8002"
+#    networks:
+#      local_net:
+#        aliases:
+#         - categoryservice
+
+  oauth:
+    depends_on:
+      - eureka
+      - database
+    build:
+      context: ./authorization-server
+      dockerfile: ./Dockerfile
+    ports:
+      - "8090:8090"
+    networks:
+      local_net:
+        aliases:
+          - oauth
+
+#  productservice:
+#    depends_on:
+#      - eureka
+#      - database
+#    build:
+#      context: ./productservice
+#      dockerfile: ./Dockerfile
+#    ports:
+#      - "8001:8001"
+#    networks:
+#      local_net:
+#        aliases:
+#          - productservice
+
+  userservice:
+    depends_on:
+      - eureka
+      - database
+    build:
+      context: ./userservice
+      dockerfile: ./Dockerfile
+    ports:
+      - "8003:8003"
+    networks:
+      local_net:
+        aliases:
+          - userservice
+
+#  contentservice:
+#    depends_on:
+#      - eureka
+#    build:
+#      context: ./contentservice
+#      dockerfile: ./Dockerfile
+#    ports:
+#      - "8004:8004"
+#    networks:
+#      local_net:
+#        aliases:
+#          - contentservice
+
+networks:
+  local_net:
+    driver: bridge

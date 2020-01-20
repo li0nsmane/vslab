@@ -1,0 +1,27 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: product-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://database:5432/db
+    username: admin
+    password: password1234
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:8090/auth/user
+      #jwk:
+      #  key-set-uri: http://localhost:8090/auth/oauth2/keys
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 5
+    metadataMap:
+      instanceId: "${spring.application.name}:${random.value}"

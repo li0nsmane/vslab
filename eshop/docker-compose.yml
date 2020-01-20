@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  legacywebshop:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      local_dev_net:
+          aliases:
+              - legacywebshop
+networks:
+  local_dev_net:
+    driver: bridge
