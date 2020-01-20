@@ -1,0 +1,31 @@
+server:
+  port: 8762
+spring:
+  application:
+    name: user-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver 
+    url: jdbc:hsqldb:hsql://userdb:9001/userdb 
+    username: sa 
+    password: 
+auth:
+  server:
+    url: http://oauth:8081/auth/oauth/check_token
+    clientId: client
+    clientsecret: clientsecret
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 5
+    metadataMap:
+      instanceId: "${spring.application.name}:${random.value}"
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://oauth:8081/auth/user

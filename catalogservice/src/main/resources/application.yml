@@ -1,0 +1,28 @@
+server:
+  port: 8768
+spring:
+  application:
+    name: catalog-service
+auth:
+  server:
+    url: http://oauth:8081/auth/oauth/check_token
+    clientId: client
+    clientsecret: clientsecret
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 5
+    metadataMap:
+      instanceId: "${spring.application.name}:${random.value}"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://oauth:8081/auth/user

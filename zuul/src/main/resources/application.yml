@@ -1,0 +1,45 @@
+server:
+  port: 8770
+  
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /info
+    healthCheckUrlPath: /health
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - "*"
+      
+zuul:
+  sensitive-headers:  - Cookie,Set-Cookie
+  ignored-services:
+  - '*'
+  ribbon:    eager-load:      enabled: true
+  #prefix: /webshop
+  routes:
+    user-service:
+      path: /users/**
+      service-id: user-service
+      strip-prefix: false
+    catalog-service:
+      path: /**
+      service-id: catalog-service
+      strip-prefix: true
+    oauth:
+      path: /auth/**
+      service-id: oauth
+      strip-prefix: false
+
+auth:
+ server:
+    url: http://oauth:8081/auth/oauth/check_token
+    clientId: client
+    clientsecret: clientsecret        
+#security:
+#  oauth2:
+#   resource:
+#     user-info-uri: http://localhost:8081/auth/user

@@ -1,0 +1,23 @@
+server:
+  port: 8766
+spring:
+  application:
+    name: category-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver 
+    url: jdbc:hsqldb:hsql://categorydb:9001/categorydb 
+    username: sa 
+    password: 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 5
+    metadataMap:
+      instanceId: "${spring.application.name}:${random.value}"
+
