@@ -22,5 +22,8 @@ management:
       exposure:
         include: hystrix.stream
       base-path: /
-
-
+auth:
+  server:
+    url: http://oauth:8090/auth/oauth/check_token
+    clientId: messaging-client
+    clientsecret: secret
