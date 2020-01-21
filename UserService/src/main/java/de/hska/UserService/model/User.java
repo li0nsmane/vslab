@@ -1,4 +1,4 @@
-package de.hska.UserService;
+package de.hska.UserService.model;
 
 import javax.persistence.*;
 

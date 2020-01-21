@@ -7,6 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import de.hska.UserService.model.User;
+import de.hska.UserService.model.UserRole;
+import de.hska.UserService.repos.RoleRepository;
+import de.hska.UserService.repos.UserRepository;
+
 import java.util.Optional;
 
 @RestController
