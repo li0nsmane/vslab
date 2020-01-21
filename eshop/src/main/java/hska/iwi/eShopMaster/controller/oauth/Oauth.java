@@ -12,9 +12,9 @@ import org.springframework.web.client.RestTemplate;
 
 public class Oauth {
 	
-		private static final String TOKEN_URI = "http://localhost:8020/auth/auth/oauth/token";
+		private static final String TOKEN_URI = "http://localhost:8020/auth/oauth/token";
 		private static final String CLIENT_ID = "messaging-client";
-		private static final String CLIENT_SECRET = "{noop}secret";
+		private static final String CLIENT_SECRET = "secret";
 		private static final String SCOPE = "openid";
 		private static final String GRANT_TYPE = "password";
 		private static OAuth2RestTemplate OAUTH2_REST_TEMPLATE;

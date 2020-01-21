@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.provider.code.InMemoryAuthorizationCo
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
+@SuppressWarnings("deprecation")
 @Configuration
 @EnableAuthorizationServer
 public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
@@ -36,9 +37,9 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("messaging-client")
-                .secret("{noop}secret")
+                .secret("secret")
                 .authorizedGrantTypes("authorization_code", "password", "client_credentials", "refresh_token")
-                .authorities("USER")
+          //      .authorities("USER")
           //      .redirectUris("http://localhost:8080/client/authorized")
                 .scopes("openid");
     }
@@ -69,29 +70,3 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         return new InMemoryAuthorizationCodeServices();
     }
 }
-
-/*    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
-        dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
-        dataSource.setUrl(env.getProperty("jdbc.url"));
-        dataSource.setUsername(env.getProperty("jdbc.user"));
-        dataSource.setPassword(env.getProperty("jdbc.pass"));
-        return dataSource;
-    }*/
-
-    /*
-
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-
-        clients.inMemory()
-
-                .withClient("clientId").secret("clientsecret")
-                .authorizedGrantTypes("authorization_code", "refresh_token", "password")
-                .scopes("openid");
-    }
-
-
-} */

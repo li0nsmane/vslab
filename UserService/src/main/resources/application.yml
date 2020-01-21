@@ -10,7 +10,10 @@ spring:
     url: jdbc:postgresql://database:5432/db
     username: admin
     password: password1234
-
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://oauth:8090/auth/oauth/user
 eureka:
   client:
     serviceUrl:

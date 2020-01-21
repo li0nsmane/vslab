@@ -17,6 +17,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
 
+@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
 @Order(-20)
@@ -43,7 +44,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        System.err.println("configure auth");
 //        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
         auth.inMemoryAuthentication()
                 .withUser("enduser")
@@ -70,7 +70,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        System.err.println("configureHttp");
         http
                 .requestMatchers()
                 .antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")

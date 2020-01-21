@@ -4,6 +4,7 @@ package de.hska.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -69,6 +70,7 @@ public class UserController {
         return false;
     }
 
+    @PreAuthorize("#oauth2.hasScope('openid') and hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable long id) {
         Optional<User> user = userRepository.findById(id);

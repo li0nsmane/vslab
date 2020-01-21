@@ -5,13 +5,6 @@ server:
 spring:
   application:
     name: oauth
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#  datasource:
-#    url: jdbc:postgresql://database:5432/db
-#    username: admin
-#    password: password1234
 
 eureka:
   client:

@@ -7,15 +7,21 @@ eureka:
     statusPageUrlPath: /info
     healthCheckUrlPath: /health
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "*"
+
 zuul:
-  host:
-    connect-timeout-millis: 20000
-    socket-timeout-millis: 60000
-  ignored-services: "*"
+  sensitive-headers: Cookie,Set-Cookie
+  ignored-services:
+    - '*'
   ribbon:
-    ReadTimeout: 20000
     eager-load:
       enabled: true
+  #prefix: /webshop
   routes:
     user-service:
       path: /users/**
@@ -23,26 +29,25 @@ zuul:
       strip-prefix: false
     catalog-service:
       path: /**
-      service-id: content-service
+      service-id: catalog-service
       strip-prefix: true
     oauth:
       path: /auth/**
       service-id: oauth
       strip-prefix: false
 
-security:
-  oauth2:
-    client:
-      accessTokenUri: http://oauth:8090/auth/oauth/token
-      clientId: messaging-client
-      clientSecret: "{noop}secret"
+#auth:
+#  server:
+#    url: http://oauth:8090/auth/oauth/check_token
+#    clientId: messaging-client
+#    clientSecret: "{noop}secret"
 
-#security:
-#  oauth2:
-#    resource:
-#      token-info-uri: https://oauth:8090/auth/oauth/check_token
-#      userInfoUri: http://oauth:8090/auth/user
-#    client:
-#      accessTokenUri: http://oauth:8090/uaa/oauth/token
-#      clientId: messaging-client
-#      clientSecret:
+spring:
+  security:
+    oauth2:
+      client:
+        clientId: messaging-client
+        clientSecret: "{noop}secret"
+      resource:
+        tokenInfoUri: http://oauth:8090/auth/oauth/check_token
+        userInfoUri: http://oauth:8090/auth/oauth/user

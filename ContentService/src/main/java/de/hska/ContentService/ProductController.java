@@ -4,6 +4,7 @@ import de.hska.ContentService.data.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -41,7 +42,7 @@ public class ProductController {
 
     }
 
-
+    @PreAuthorize("#oauth2.hasScope('openid') and hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
         long categoryId = product.getCategoryId();
@@ -53,7 +54,7 @@ public class ProductController {
         return new ResponseEntity<Product>(product1, HttpStatus.OK);
     }
 
-
+    @PreAuthorize("#oauth2.hasScope('openid') and hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable long id) {
         productClient.deleteProduct(id);

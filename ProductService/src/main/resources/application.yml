@@ -10,12 +10,6 @@ spring:
     url: jdbc:postgresql://database:5432/db
     username: admin
     password: password1234
-security:
-  oauth2:
-    resource:
-      user-info-uri: http://localhost:8090/auth/user
-      #jwk:
-      #  key-set-uri: http://localhost:8090/auth/oauth2/keys
 eureka:
   client:
     serviceUrl:
