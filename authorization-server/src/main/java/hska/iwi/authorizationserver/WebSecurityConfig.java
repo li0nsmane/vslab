@@ -23,7 +23,7 @@ import org.springframework.security.web.firewall.StrictHttpFirewall;
 @Order(-20)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
+/*    @Bean
     public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
         StrictHttpFirewall firewall = new StrictHttpFirewall();
         firewall.setAllowUrlEncodedSlash(true);
@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         super.configure(web);
         web.httpFirewall(allowUrlEncodedSlashHttpFirewall());
-    }
+    }*/
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
@@ -44,28 +44,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
-        auth.inMemoryAuthentication()
+        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
+/*        auth.inMemoryAuthentication()
                 .withUser("enduser")
                 .password("password")
-                .roles("USER");
+                .roles("USER")
+                .and()
+                .withUser("admin")
+                .password("password")
+                .roles("ADMIN");*/
 
-         /*oder
-        auth.userDetailsService(userDetailsService); */
     }
 
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-
-        System.err.println("userDetails");
-        // return new UserDetailService();
-        return new InMemoryUserDetailsManager(
+        return new UserDetailService();
+/*        return new InMemoryUserDetailsManager(
                 User.withDefaultPasswordEncoder()
                         .username("enduser")
                         .password("password")
                         .roles("USER")
-                        .build());
+                        .build());*/
     }
 
     @Override

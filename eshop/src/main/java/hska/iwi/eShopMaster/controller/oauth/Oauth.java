@@ -2,17 +2,21 @@ package hska.iwi.eShopMaster.controller.oauth;
 
 import java.util.ArrayList;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 import org.springframework.security.oauth2.client.token.AccessTokenRequest;
 import org.springframework.security.oauth2.client.token.DefaultAccessTokenRequest;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
+import org.springframework.security.oauth2.common.AuthenticationScheme;
 import org.springframework.web.client.RestTemplate;
+
 
 public class Oauth {
 	
-		private static final String TOKEN_URI = "http://localhost:8020/auth/oauth/token";
+		private static final String TOKEN_URI = "http://zuul:8020/auth/oauth/token";
 		private static final String CLIENT_ID = "messaging-client";
 		private static final String CLIENT_SECRET = "secret";
 		private static final String SCOPE = "openid";

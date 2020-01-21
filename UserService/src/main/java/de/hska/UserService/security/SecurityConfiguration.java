@@ -18,8 +18,8 @@ public class SecurityConfiguration extends ResourceServerConfigurerAdapter {
 	public RemoteTokenServices tokenService() {
 		RemoteTokenServices tokenService = new RemoteTokenServices();
 		tokenService.setCheckTokenEndpointUrl("http://oauth:8090/auth/oauth/check_token");
-		tokenService.setClientId("client");
-		tokenService.setClientSecret("clientsecret");
+		tokenService.setClientId("messaging-client");
+		tokenService.setClientSecret("secret");
 		return tokenService;
 	}
 

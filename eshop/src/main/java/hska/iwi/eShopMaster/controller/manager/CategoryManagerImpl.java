@@ -50,7 +50,8 @@ public class CategoryManagerImpl {
 
 	public void addCategory(String name) {
 		try {
-			oAuth2RestTemplate.postForEntity(CAT_URL, name, Category.class);
+
+			oAuth2RestTemplate.postForEntity(CAT_URL, new Category(name), Category.class);
 		
 		} catch (Exception e) {
 			e.printStackTrace();

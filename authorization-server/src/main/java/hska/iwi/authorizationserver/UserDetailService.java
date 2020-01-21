@@ -1,6 +1,8 @@
 package hska.iwi.authorizationserver;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,7 +13,20 @@ public class UserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        ShopUser user = userClient.getUserByUsername(username);
+        ShopUser user = null;
+        if(username.equals("enduser")) {
+
+            Role role = new Role("user", 1);
+            user = new ShopUser("enduser", "Leonie", "H", "password", role);
+        } else if(username.equals("admin")) {
+
+            Role role = new Role("admin", 0);
+            user = new ShopUser("admin", "LeonieA", "H", "password", role);
+        }
+        else {
+            user = userClient.getUserByUsername(username);
+
+        }
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }

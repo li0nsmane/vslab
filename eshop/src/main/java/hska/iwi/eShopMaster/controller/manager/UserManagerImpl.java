@@ -14,10 +14,13 @@ public class UserManagerImpl {
 	private static final String USER_URL = "http://zuul:8020/users";
 
 	public void registerUser(String username, String name, String lastname, String password, String password2) {
-		UserRegistration user = new UserRegistration(username, name, lastname, password, password2);
-
-		OAuth2RestTemplate oAuth2RestTemplate = Oauth.getOAuth2RestTemplate();
-		oAuth2RestTemplate.postForEntity(USER_URL, user, User.class);
+		if (!((username == null) || (name == null) || (lastname == null) || (password == null) || (password2 == null)
+		|| password.equals(password2))) {
+			UserRegistration user = new UserRegistration(username, name, lastname, password, password2);
+			System.out.println("registerUser in eshop userm");
+			OAuth2RestTemplate oAuth2RestTemplate = Oauth.getOAuth2RestTemplate();
+			oAuth2RestTemplate.postForEntity(USER_URL, user, User.class);
+		}
 	}
 
 	public User login(String username, String password) {
@@ -27,9 +30,7 @@ public class UserManagerImpl {
 		}
 		try {
 			OAuth2RestTemplate oAuth2RestTemplate = Oauth.createOAuth2RestTemplate(username, password);
-			System.out.println("managerImpl" + oAuth2RestTemplate.getAccessToken().getTokenType());
 			User user = oAuth2RestTemplate.getForEntity(USER_URL + "/" + u.getUsername(), User.class).getBody();
-			System.out.println("managerImpl get call" + oAuth2RestTemplate.toString());
 			return user;
 		} catch (Exception e) {
 			e.printStackTrace();

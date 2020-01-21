@@ -40,7 +40,7 @@ public class ProductManagerImpl {
 	public List<Product> getProductsForSearchValues(String searchDescription,
 			Double searchMinPrice, Double searchMaxPrice) {
 		try {
-			ApiProduct[] aps = oAuth2RestTemplate.getForEntity(PRODUCT_URL, ApiProduct[].class,
+			ApiProduct[] aps = oAuth2RestTemplate.getForEntity(PRODUCT_URL + "/search", ApiProduct[].class,
 					searchDescription, searchMinPrice, searchMaxPrice).getBody();
 			List<Product> ps = new ArrayList<Product>();
 			for(ApiProduct p: aps) {
@@ -92,7 +92,7 @@ public class ProductManagerImpl {
 			}
 			
 			try {
-				ApiProduct p = oAuth2RestTemplate.postForEntity(PRODUCT_URL, name, ApiProduct.class).getBody();
+				ApiProduct p = oAuth2RestTemplate.postForEntity(PRODUCT_URL, product, ApiProduct.class).getBody();
 				productId = p.getId();
 				
 			} catch (Exception e) {

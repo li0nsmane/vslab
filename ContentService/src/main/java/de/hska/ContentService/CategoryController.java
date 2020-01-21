@@ -14,8 +14,6 @@ public class CategoryController {
     @Autowired
     private CategoryClient categoryClient;
 
-
-
     @GetMapping
     public ResponseEntity<Iterable<Category>> getCategories() {
         return new ResponseEntity<Iterable<Category>>(categoryClient.getCategories(), HttpStatus.OK);

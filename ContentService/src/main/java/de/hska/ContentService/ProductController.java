@@ -35,7 +35,6 @@ public class ProductController {
     @PostMapping(value = "search")
     public ResponseEntity<Iterable<Product>> searchProduct(@RequestBody SearchRequest searchRequest) {
 
-
         return new ResponseEntity<Iterable<Product>>(
                 productClient.searchProducts(searchRequest),
                 HttpStatus.OK);

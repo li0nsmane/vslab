@@ -15,10 +15,15 @@ management:
           - "*"
 
 zuul:
+  host:
+    socket-timeout-millis: 20000
+    connect-timeout-millis: 20000
   sensitive-headers: Cookie,Set-Cookie
   ignored-services:
     - '*'
   ribbon:
+    ReadTimeout: 60000
+    ConnectTimeout: 60000
     eager-load:
       enabled: true
   #prefix: /webshop
@@ -47,7 +52,7 @@ spring:
     oauth2:
       client:
         clientId: messaging-client
-        clientSecret: "{noop}secret"
+        clientSecret: secret
       resource:
         tokenInfoUri: http://oauth:8090/auth/oauth/check_token
         userInfoUri: http://oauth:8090/auth/oauth/user
