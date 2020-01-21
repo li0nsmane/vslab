@@ -26,5 +26,5 @@ eureka:
 auth:
   server:
     url: http://oauth:8090/auth/oauth/check_token
-    clientId: client
-    clientsecret: clientsecret
+    clientId: messaging-client
+    clientsecret: secret
