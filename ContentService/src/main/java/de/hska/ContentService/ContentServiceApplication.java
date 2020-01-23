@@ -17,9 +17,9 @@ import org.springframework.web.client.RestTemplate;
 @EnableEurekaClient
 @EnableCircuitBreaker
 @EnableHystrixDashboard
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableResourceServer
 @RibbonClient("content-service")
+@EnableResourceServer
+
 public class ContentServiceApplication {
 
 	@LoadBalanced

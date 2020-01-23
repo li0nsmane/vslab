@@ -1,4 +1,4 @@
-package de.hska.ContentService.security;
+package de.hska.ContentService.sec;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

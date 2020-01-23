@@ -62,19 +62,19 @@ services:
     #    aliases:
      #     - hystrix
 
-#  categoryservice:
-#    depends_on:
-#      - eureka
-#      - database
-#    build:
-#      context: ./categoryservice
-#      dockerfile: ./Dockerfile
-#    ports:
-#      - "8002:8002"
-#    networks:
-#      local_net:
-#        aliases:
-#         - categoryservice
+  categoryservice:
+    depends_on:
+      - eureka
+      - database
+    build:
+      context: ./categoryservice
+      dockerfile: ./Dockerfile
+    ports:
+      - "8002:8002"
+    networks:
+      local_net:
+        aliases:
+         - categoryservice
 
   oauth:
     depends_on:
@@ -90,19 +90,19 @@ services:
         aliases:
           - oauth
 
-#  productservice:
-#    depends_on:
-#      - eureka
-#      - database
-#    build:
-#      context: ./productservice
-#      dockerfile: ./Dockerfile
-#    ports:
-#      - "8001:8001"
-#    networks:
-#      local_net:
-#        aliases:
-#          - productservice
+  productservice:
+    depends_on:
+      - eureka
+      - database
+    build:
+      context: ./productservice
+      dockerfile: ./Dockerfile
+    ports:
+      - "8001:8001"
+    networks:
+      local_net:
+        aliases:
+          - productservice
 
   userservice:
     depends_on:
@@ -118,18 +118,18 @@ services:
         aliases:
           - userservice
 
-#  contentservice:
-#    depends_on:
-#      - eureka
-#    build:
-#      context: ./contentservice
-#      dockerfile: ./Dockerfile
-#    ports:
-#      - "8004:8004"
-#    networks:
-#      local_net:
-#        aliases:
-#          - contentservice
+  contentservice:
+    depends_on:
+      - eureka
+    build:
+      context: ./contentservice
+      dockerfile: ./Dockerfile
+    ports:
+      - "8004:8004"
+    networks:
+      local_net:
+        aliases:
+          - contentservice
 
 networks:
   local_net:

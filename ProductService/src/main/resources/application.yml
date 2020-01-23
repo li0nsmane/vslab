@@ -19,3 +19,9 @@ eureka:
     leaseRenewalIntervalInSeconds: 5
     metadataMap:
       instanceId: "${spring.application.name}:${random.value}"
+auth:
+  server:
+    url: http://oauth:8090/auth/oauth/check_token
+    clientId: messaging-client
+    clientsecret: secret
+

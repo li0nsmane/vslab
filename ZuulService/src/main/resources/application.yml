@@ -34,7 +34,7 @@ zuul:
       strip-prefix: false
     catalog-service:
       path: /**
-      service-id: catalog-service
+      service-id: content-service
       strip-prefix: true
     oauth:
       path: /auth/**

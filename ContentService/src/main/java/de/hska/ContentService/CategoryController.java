@@ -4,7 +4,7 @@ import de.hska.ContentService.data.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,14 +25,14 @@ public class CategoryController {
     }
 
 
-    @PreAuthorize("#oauth2.hasScope('openid') and hasRole('ROLE_ADMIN')")
+  //  @PreAuthorize("#oauth2.hasScope('openid') and hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<Category> createCategory(@RequestBody Category category) {
         Category categoryId = categoryClient.addCategory(category);
         return new ResponseEntity<Category>(categoryId, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("#oauth2.hasScope('openid') and hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("#oauth2.hasScope('openid') and hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable long id) {
         categoryClient.deleteCategory(id);
