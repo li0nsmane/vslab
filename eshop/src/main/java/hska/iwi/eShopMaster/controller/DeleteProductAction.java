@@ -1,6 +1,8 @@
 package hska.iwi.eShopMaster.controller;
 
-import hska.iwi.eShopMaster.controller.manager.ProductManagerImpl;
+import hska.iwi.eShopMaster.model.businessLogic.manager.ProductManager;
+import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ProductManagerImpl;
+
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
 
 import java.util.Map;
@@ -20,16 +22,17 @@ public class DeleteProductAction extends ActionSupport {
 	public String execute() throws Exception {
 		
 		String res = "input";
-		
-		ProductManagerImpl productManager = new ProductManagerImpl();
+
+		ProductManager productManager = new ProductManagerImpl();
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("webshop_user");
 		
 		if(user != null && (user.getRole().getTyp().equals("admin"))) {
 
 			productManager.deleteProductById(id);
-			res = "success";
-			
+			{
+				res = "success";
+			}
 		}
 		
 		return res;

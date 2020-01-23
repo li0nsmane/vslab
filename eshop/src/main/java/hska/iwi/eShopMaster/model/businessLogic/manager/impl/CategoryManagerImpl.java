@@ -1,4 +1,4 @@
-package hska.iwi.eShopMaster.controller.manager;
+package hska.iwi.eShopMaster.model.businessLogic.manager.impl;
 
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import hska.iwi.eShopMaster.controller.oauth.Oauth;
 import hska.iwi.eShopMaster.model.database.dataobjects.Category;
 
-public class CategoryManagerImpl {
+public class CategoryManagerImpl implements hska.iwi.eShopMaster.model.businessLogic.manager.CategoryManager {
 
 
 	private static final String CAT_URL = "http://zuul:8020/categories";
@@ -59,7 +59,7 @@ public class CategoryManagerImpl {
 	}
 
 	public void delCategory(Category cat) {
-		this.delCategoryById(cat.getCategoryId());
+		this.delCategoryById(cat.getId());
 	}
 
 	public void delCategoryById(int id) {

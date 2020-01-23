@@ -4,9 +4,18 @@ package hska.iwi.eShopMaster.model.database.dataobjects;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Category {
 
-	private int category_id;
+/**
+ * This class contains details about categories.
+ */
+
+public class Category implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int id;
 	private String name;
 	private Set<Product> products = new HashSet<Product>(0);
 
@@ -22,12 +31,13 @@ public class Category {
 		this.products = products;
 	}
 
-	public int getCategoryId() {
-		return this.category_id;
+
+	public int getId() {
+		return this.id;
 	}
 
-	public void setCategoryId(int id) {
-		this.category_id = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -37,6 +47,7 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 	public Set<Product> getProducts() {
 		return this.products;

@@ -28,6 +28,7 @@ public class Oauth {
 		}
 
 	    public static OAuth2RestTemplate getOAuth2RestTemplate() {
+
 	        return OAUTH2_REST_TEMPLATE;
 	    }
 

@@ -32,9 +32,9 @@ public class UserDetailService implements UserDetailsService {
         }
         String role;
         if (user.getRole().getLevel() == 0) {
-            role = "ADMIN";
+            role = "ROLE_ADMIN";
         } else {
-            role = "USER";
+            role = "ROLE_USER";
         }
         UserDetails userDetails = new UsrDetails(user.getId(), user.getUsername(), user.getPassword(), role);
         return userDetails;

@@ -1,9 +1,11 @@
-package hska.iwi.eShopMaster.controller.manager;
+package hska.iwi.eShopMaster.model.businessLogic.manager.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+import hska.iwi.eShopMaster.model.businessLogic.manager.ProductManager;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 
 import hska.iwi.eShopMaster.controller.oauth.Oauth;
@@ -11,7 +13,7 @@ import hska.iwi.eShopMaster.model.database.dataobjects.ApiProduct;
 import hska.iwi.eShopMaster.model.database.dataobjects.Category;
 import hska.iwi.eShopMaster.model.database.dataobjects.Product;
 
-public class ProductManagerImpl {
+public class ProductManagerImpl implements ProductManager {
 	
 	private static final String PRODUCT_URL = "http://zuul:8020/products";
 	private static final String CAT_URL = "http://zuul:8020/categories";
@@ -86,7 +88,7 @@ public class ProductManagerImpl {
 		Category category = categoryManager.getCategory(categoryId);
 		
 		if(category != null){
-			ApiProduct product= new ApiProduct(name, category.getCategoryId(), price);
+			ApiProduct product= new ApiProduct(name, category.getId(), price);
 			if(details != null){
 				product.setDetails(details);
 			}
@@ -119,7 +121,7 @@ public class ProductManagerImpl {
 						oAuth2RestTemplate.getForEntity(
 								CAT_URL + "/" + categoryId + "/products", Product[].class).getBody()));
 		for(Product p: ps) {
-			this.deleteProductById(p.getProductId());
+			this.deleteProductById(p.getId());
 		}
 		return false;
 	}

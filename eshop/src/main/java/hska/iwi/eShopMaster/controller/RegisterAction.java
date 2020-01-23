@@ -1,16 +1,13 @@
 package hska.iwi.eShopMaster.controller;
 
+import hska.iwi.eShopMaster.model.businessLogic.manager.UserManager;
+import hska.iwi.eShopMaster.model.businessLogic.manager.impl.UserManagerImpl;
+import hska.iwi.eShopMaster.model.database.dataobjects.Role;
+
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-
-import hska.iwi.eShopMaster.controller.manager.UserManagerImpl;
-import hska.iwi.eShopMaster.controller.oauth.Oauth;
-import hska.iwi.eShopMaster.model.database.dataobjects.Role;
-import hska.iwi.eShopMaster.model.database.dataobjects.User;
-import hska.iwi.eShopMaster.model.database.dataobjects.UserRegistration;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 
 public class RegisterAction extends ActionSupport {
 
@@ -32,17 +29,14 @@ public class RegisterAction extends ActionSupport {
         // Return string:
         String result = "input";
 
-        UserManagerImpl userManager = new UserManagerImpl();
+        UserManager userManager = new UserManagerImpl();
 
    		this.role = userManager.getRoleByLevel(1); // 1 -> regular User, 2-> Admin
-        if ((this.username == null) || (this.firstname == null) || (this.lastname == null) || (this.password1 == null) || (this.password2 == null)
-                || this.password1.equals(this.password2)) {
-            addActionError(getText("error.register.invalid"));
-        }
+
    		if (!userManager.doesUserAlreadyExist(this.username)) {
     		    	
 	        // save it to database
-	        userManager.registerUser(this.username, this.firstname, this.lastname, this.password1, this.password2);
+	        userManager.registerUser(this.username, this.firstname, this.lastname, this.password1, this.role);
 	            // User has been saved successfully to databse:
 	        	addActionMessage("user registered, please login");
 	        	addActionError("user registered, please login");
@@ -54,7 +48,6 @@ public class RegisterAction extends ActionSupport {
     	else {
     		addActionError(getText("error.username.alreadyInUse"));
     	}
-        System.out.println(result);
         return result;
 
     }

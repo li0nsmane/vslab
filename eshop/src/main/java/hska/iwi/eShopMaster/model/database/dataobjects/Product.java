@@ -1,14 +1,32 @@
 package hska.iwi.eShopMaster.model.database.dataobjects;
 
-public class Product {
 
-	private int product_id;
+
+
+/**
+ * This class contains details about products.
+ */
+
+public class Product implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	private int id;
+
 
 	private String name;
 
+
 	private double price;
 
+	
+
 	private Category category;
+
 
 	private String details;
 
@@ -21,19 +39,19 @@ public class Product {
 		this.category = category;
 	}
 
-	public Product(String name, double price, Category categoryId, String details) {
+	public Product(String name, double price, Category category, String details) {
 		this.name = name;
 		this.price = price;
 		this.category = category;
 		this.details = details;
 	}
 
-	public int getProductId() {
-		return this.product_id;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setProductId(int id) {
-		this.product_id = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -56,7 +74,7 @@ public class Product {
 		return this.category;
 	}
 
-	public void setCategoryId(Category category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 

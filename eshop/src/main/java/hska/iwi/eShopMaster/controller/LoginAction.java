@@ -1,12 +1,13 @@
 package hska.iwi.eShopMaster.controller;
 
+import hska.iwi.eShopMaster.model.businessLogic.manager.UserManager;
+import hska.iwi.eShopMaster.model.businessLogic.manager.impl.UserManagerImpl;
+import hska.iwi.eShopMaster.model.database.dataobjects.User;
+
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-
-import hska.iwi.eShopMaster.controller.manager.UserManagerImpl;
-import hska.iwi.eShopMaster.model.database.dataobjects.User;
 
 public class LoginAction extends ActionSupport {
 
@@ -27,11 +28,11 @@ public class LoginAction extends ActionSupport {
 		// Return string:
 		String result = "input";
 
-		UserManagerImpl myCManager = new UserManagerImpl();
+		UserManager myCManager = new UserManagerImpl();
 		
 		// Get user from DB:
-		User user = myCManager.login(getUsername(), getPassword());
-        System.out.println("after login: " + username + password);
+		User user = myCManager.getUserByUsername(getUsername());
+
 		// Does user exist?
 		if (user != null) {
 			// Is the password correct?

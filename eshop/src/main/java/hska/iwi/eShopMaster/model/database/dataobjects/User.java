@@ -1,12 +1,39 @@
 package hska.iwi.eShopMaster.model.database.dataobjects;
 
-public class User {
+
+
+/**
+ * This class contains the users of the webshop.
+ */
+
+public class User implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 
 	private int id;
+
+	
+
 	private String username;
+
+	
+
 	private String firstname;
+
+	
+
 	private String lastname;
-	private String password;	
+
+	
+
+	private String password;
+
+
 	private Role role;
 
 	public User() {
@@ -21,11 +48,11 @@ public class User {
 		this.role = role;
 	}
 
-	public int getUserId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setUserId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

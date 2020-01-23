@@ -2,7 +2,6 @@ package hska.iwi.eShopMaster.controller;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import hska.iwi.eShopMaster.controller.oauth.Oauth;
 
 public class LogoutAction extends ActionSupport {
 
@@ -15,7 +14,7 @@ public class LogoutAction extends ActionSupport {
 
 		// Clear session:
 		ActionContext.getContext().getSession().clear();
-		Oauth.deleteOAuth2RestTemplate();
+		
 		return "success";
 		
 	}

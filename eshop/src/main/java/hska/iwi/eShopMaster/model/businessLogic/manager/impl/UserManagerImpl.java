@@ -1,27 +1,28 @@
-package hska.iwi.eShopMaster.controller.manager;
+package hska.iwi.eShopMaster.model.businessLogic.manager.impl;
 
+
+import hska.iwi.eShopMaster.model.businessLogic.manager.UserManager;
+import hska.iwi.eShopMaster.model.database.dataobjects.UserLogin;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 
 import hska.iwi.eShopMaster.controller.oauth.Oauth;
 import hska.iwi.eShopMaster.model.database.dataobjects.Role;
 import hska.iwi.eShopMaster.model.database.dataobjects.User;
-import hska.iwi.eShopMaster.model.database.dataobjects.UserLogin;
-import hska.iwi.eShopMaster.model.database.dataobjects.UserRegistration;
+
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 
-public class UserManagerImpl {
+public class UserManagerImpl implements UserManager {
 
 	private static final String USER_URL = "http://zuul:8020/users";
 
-	public void registerUser(String username, String name, String lastname, String password, String password2) {
-		if (!((username == null) || (name == null) || (lastname == null) || (password == null) || (password2 == null)
-		|| password.equals(password2))) {
-			UserRegistration user = new UserRegistration(username, name, lastname, password, password2);
-			System.out.println("registerUser in eshop userm");
-			OAuth2RestTemplate oAuth2RestTemplate = Oauth.getOAuth2RestTemplate();
-			oAuth2RestTemplate.postForEntity(USER_URL, user, User.class);
-		}
-	}
+
+
 
 	public User login(String username, String password) {
 		UserLogin u = new UserLogin(username, password);
@@ -38,12 +39,34 @@ public class UserManagerImpl {
 		}
 	}
 
-	public User getUserByUsername(String username) {
+	@Override
+	public void registerUser(String username, String name, String lastname, String password, Role role) {
+		System.out.println("start registering "+username + " name: "+name + " lastname: "+lastname +" password_ "+password  );
+		if ((username != null) && (name != null) && (lastname != null) && (password != null) ) {
+			User user = new User(username, name, lastname, password, new Role("", 1));
+			System.out.println("registerUser in eshop userm");
+			RestTemplate oAuth2RestTemplate = Oauth.getDefaultRestTemplate();
+			ResponseEntity<Long> id = oAuth2RestTemplate.postForEntity(USER_URL, user, Long.class);
+
+		}
+	}
+
+	public User getUserByUsername(String username)  {
 		if (username == null || username.equals("")) {
 			return null;
 		}
+		String encodedUserName = "";
+		try {
+			encodedUserName= URLDecoder.decode(username, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		try {
+			return Oauth.getDefaultRestTemplate().getForObject(USER_URL + "/" + encodedUserName, User.class);
 
-		return Oauth.getDefaultRestTemplate().getForEntity(USER_URL + "/" + username, User.class).getBody();
+		}catch (HttpClientErrorException ex){
+			return null;
+		}
 	}
 
 	public boolean deleteUserById(int id) {

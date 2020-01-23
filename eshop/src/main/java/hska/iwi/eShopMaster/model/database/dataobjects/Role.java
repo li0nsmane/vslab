@@ -1,11 +1,27 @@
 package hska.iwi.eShopMaster.model.database.dataobjects;
 
 
-public class Role {
 
-	private int role_id;
+
+/**
+ * This class contains details about roles.
+ */
+
+public class Role implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	private int id;
+
+
 	private String typ;
 	
+	
+
 	private int level;
 
 	public Role() {
@@ -16,12 +32,12 @@ public class Role {
 		this.level = level;
 	}
 
-	public int getRoleId() {
-		return this.role_id;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setRoleId(int id) {
-		this.role_id = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTyp() {
