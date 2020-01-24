@@ -2,7 +2,6 @@ package hska.iwi.eShopMaster.model.database.dataobjects;
 
 
 
-
 /**
  * This class contains details about roles.
  */

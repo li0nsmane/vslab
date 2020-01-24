@@ -2,6 +2,7 @@ package hska.iwi.eShopMaster.model.database.dataobjects;
 
 
 
+
 /**
  * This class contains the users of the webshop.
  */
@@ -32,7 +33,6 @@ public class User implements java.io.Serializable {
 	
 
 	private String password;
-
 
 	private Role role;
 

@@ -40,6 +40,7 @@ public class Category implements java.io.Serializable {
 		this.id = id;
 	}
 
+
 	public String getName() {
 		return this.name;
 	}
@@ -47,7 +48,6 @@ public class Category implements java.io.Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public Set<Product> getProducts() {
 		return this.products;
