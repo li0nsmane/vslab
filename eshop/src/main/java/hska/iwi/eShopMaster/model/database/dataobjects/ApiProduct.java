@@ -2,60 +2,61 @@ package hska.iwi.eShopMaster.model.database.dataobjects;
 
 public class ApiProduct {
 
-	private int id;
-	private String name;
-	private String details;
-	private int categoryId;
-	private double price;
 
-	public ApiProduct() {
-	}
+    private int id;
+    private String name;
+    private String details;
+    private int categoryId;
+    private double price;
 
-	public ApiProduct(String name, int categoryId, double price) {
-		super();
-		this.name = name;
-		this.categoryId = categoryId;
-		this.price = price;
-	}
+    public ApiProduct() {
+    }
 
-	public int getId() {
-		return id;
-	}
+    public ApiProduct(String name, int categoryId, double price) {
+        super();
+        this.name = name;
+        this.categoryId = categoryId;
+        this.price = price;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getDetails() {
-		return details;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setDetails(String details) {
-		this.details = details;
-	}
+    public String getDetails() {
+        return details;
+    }
 
-	public int getCategoryId() {
-		return categoryId;
-	}
+    public void setDetails(String details) {
+        this.details = details;
+    }
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
+    public int getCategoryId() {
+        return categoryId;
+    }
 
-	public double getPrice() {
-		return price;
-	}
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
 }

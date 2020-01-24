@@ -28,10 +28,11 @@ public class LoginAction extends ActionSupport {
 		// Return string:
 		String result = "input";
 
-		UserManager myCManager = new UserManagerImpl();
+		UserManagerImpl myCManager = new UserManagerImpl();
 		
 		// Get user from DB:
-		User user = myCManager.getUserByUsername(getUsername());
+		User user = myCManager.login(getUsername(), getPassword());
+		System.out.println("after login: " + username + password);
 
 		// Does user exist?
 		if (user != null) {

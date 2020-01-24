@@ -1,18 +1,15 @@
 package hska.iwi.eShopMaster.model.businessLogic.manager.impl;
 
 
+import hska.iwi.eShopMaster.model.businessLogic.manager.CategoryManager;
+import hska.iwi.eShopMaster.model.database.dataobjects.Category;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-
-import hska.iwi.eShopMaster.controller.oauth.Oauth;
-import hska.iwi.eShopMaster.model.database.dataobjects.Category;
-
-public class CategoryManagerImpl implements hska.iwi.eShopMaster.model.businessLogic.manager.CategoryManager {
-
-
+public class CategoryManagerImpl implements CategoryManager{
 	private static final String CAT_URL = "http://zuul:8020/categories";
 	private final OAuth2RestTemplate oAuth2RestTemplate;
 	
@@ -22,7 +19,7 @@ public class CategoryManagerImpl implements hska.iwi.eShopMaster.model.businessL
 
 	public List<Category> getCategories() {
 		try {
-			Category[] cats = oAuth2RestTemplate.getForEntity(CAT_URL, Category[].class).getBody();
+			Category[] cats = oAuth2RestTemplate.getForObject(CAT_URL, Category[].class);
 			return new ArrayList<Category>(Arrays.asList(cats));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -31,15 +28,15 @@ public class CategoryManagerImpl implements hska.iwi.eShopMaster.model.businessL
 	}
 
 	public Category getCategory(int id) {
-		return oAuth2RestTemplate.getForEntity(CAT_URL + "/" + id, Category.class).getBody();
+		return oAuth2RestTemplate.getForObject(CAT_URL + "/" + id, Category.class);
 	}
 
 	public Category getCategoryByName(String name) {
 		OAuth2RestTemplate oAuth2RestTemplate = Oauth.getOAuth2RestTemplate();
-	
+
 		List<Category> cats =
 				new ArrayList<Category>(Arrays.asList(
-						oAuth2RestTemplate.getForEntity(CAT_URL, Category[].class).getBody()));
+						oAuth2RestTemplate.getForObject(CAT_URL, Category[].class)));
 		for(Category c: cats) {
 			if(c.getName() == name) {
 				return c;
@@ -52,21 +49,24 @@ public class CategoryManagerImpl implements hska.iwi.eShopMaster.model.businessL
 		try {
 
 			oAuth2RestTemplate.postForEntity(CAT_URL, new Category(name), Category.class);
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	public void delCategory(Category cat) {
+	
+// 		Products are also deleted because of relation in Category.java 
 		this.delCategoryById(cat.getId());
 	}
 
 	public void delCategoryById(int id) {
 		try {
-			
+
 			oAuth2RestTemplate.delete(CAT_URL + "/" + id);
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
